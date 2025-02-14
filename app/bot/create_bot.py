@@ -23,9 +23,21 @@ async def set_commands():
     await bot.set_my_commands(commands, BotCommandScopeDefault())
 
 
+def set_russian_locale():
+    try:
+        # Пробуем установить локаль для Windows
+        locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251')
+    except locale.Error:
+        try:
+            # Пробуем установить локаль для Linux/macOS
+            locale.setlocale(locale.LC_TIME, 'ru_RU.utf8')
+        except locale.Error:
+            # Игнорируем ошибку, если локаль не поддерживается
+            pass
+
 # Функция, которая выполнится когда бот запустится
 async def start_bot():
-    locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251')
+    set_russian_locale()
     if settings.INIT_DB:
         await init_db()
     setup_dialogs(dp)

@@ -32,7 +32,6 @@ class Settings(BaseSettings):
             f"amqp://{self.RABBITMQ_USERNAME}:{quote(self.RABBITMQ_PASSWORD)}@"
             f"{self.RABBITMQ_HOST}:{self.RABBITMQ_PORT}/{self.VHOST}"
         )
-
     @property
     def hook_url(self) -> str:
         """Возвращает URL вебхука"""
